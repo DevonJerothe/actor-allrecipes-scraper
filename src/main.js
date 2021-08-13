@@ -91,7 +91,7 @@ function extractData(request, $) {
                 daily_value: "N/A"
             },
             fat: {
-                nutrient_value: $('.nutrition-row .nutrient-name:contains("fat:")').children('span.nutrient-value').text().trim(),
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("fat:")').children('span.nutrient-value').first().text().trim(),
                 daily_value: $('.nutrition-row .nutrient-name:contains("fat:")').next().text().trim()
             },
             saturated_fat: {
