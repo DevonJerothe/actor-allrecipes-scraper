@@ -76,9 +76,9 @@ function extractData(request, $) {
                 }
             })(),
         nutrition: {
-            protien: {
-                nutrient_value: $('.nutrition-row .nutrient-name:contains("protien:")').children('span.nutrient-value').text().trim(),
-                daily_value: $('.nutrition-row .nutrient-name:contains("protien:")').next().text().trim()
+            protein: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("protein:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("protein:")').next().text().trim()
             },
             carbohydrates: {
                 nutrient_value: $('.nutrition-row .nutrient-name:contains("carbohydrates:")').children('span.nutrient-value').text().trim(),
