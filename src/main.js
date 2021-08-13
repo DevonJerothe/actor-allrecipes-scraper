@@ -7,15 +7,16 @@ const isObject = (val) => typeof val === 'object' && val !== null && !Array.isAr
 function extractData(request, $) {
     const ingredients = $('[itemprop=recipeIngredient]').length > 0 ? $('[itemprop=recipeIngredient]')
         : $('.ingredients-section .ingredients-item-name');
-    const ingredientList = [];
+    const ingredientList = {};
 
     for (let index = 0; index < ingredients.length; index++) {
-        ingredientList.push($(ingredients[index]).text().trim());
+        ingredientList[(index + 1).toString()] = $(ingredients[index]).text().trim();
+        //ingredientList.push($(ingredients[index]).text().trim());
     }
 
     const directions = $('.recipe-directions__list--item').length > 0 ? $('.recipe-directions__list--item')
         : $('.instructions-section .section-body');
-    const directionList = [];
+    const directionList = {};
 
     for (let index = 0; index < directions.length; index++) {
         const text = $(directions[index]).text().trim()
@@ -23,7 +24,8 @@ function extractData(request, $) {
             .join('');
 
         if (text !== '') {
-            directionList.push(`${index + 1}. ${text}`);
+            directionList[`${index + 1}`] = `${text}`;
+            // directionList.push(`${index + 1}. ${text}`);
         }
     }
 
@@ -48,8 +50,8 @@ function extractData(request, $) {
                     return '';
                 }
             }),
-        ingredients: ingredientList.join(', '),
-        directions: directionList.join(' '),
+        ingredients: ingredientList,
+        directions: directionList,
         prep: $('[itemprop=prepTime]').length > 0 ? $('[itemprop=prepTime]').text()
             : $('.recipe-meta-item .recipe-meta-item-header:contains("prep:")').next().text().trim(),
         cook: $('[itemprop=cookTime]').length > 0 ? $('[itemprop=cookTime]').text()
