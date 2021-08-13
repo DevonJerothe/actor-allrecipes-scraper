@@ -30,6 +30,7 @@ function extractData(request, $) {
     return {
         url: request.url,
         name: $('#recipe-main-content').length > 0 ? $('#recipe-main-content').text() : $('.recipe-main-header .heading-content').text(),
+        img: $('meta[property="og:image"]').attr('content'),
         rating: $('meta[itemprop=ratingValue]').length > 0 ? $('meta[itemprop=ratingValue]').attr('content')
             : $('meta[name="og:rating"]').attr('content'),
         ratingcount: $('.made-it-count').length > 0
@@ -55,6 +56,8 @@ function extractData(request, $) {
             : $('.recipe-meta-item .recipe-meta-item-header:contains("cook:")').next().text().trim(),
         'ready in': $('[itemprop=totalTime]').length > 0 ? $('[itemprop=totalTime]').text()
             : $('.recipe-meta-item .recipe-meta-item-header:contains("total:")').next().text().trim(),
+        servings: $('[itemprop=recipeYield]').length > 0 ? $('[itemprop=recipeYield]').text()
+        : $('.recipe-meta-item .recipe-meta-item-header:contains("Yield:")').next().text().trim(),
         calories: $('[itemprop=calories]').length > 0
             ? (() => {
                 try {
@@ -70,6 +73,84 @@ function extractData(request, $) {
                     return '';
                 }
             })(),
+        nutrition: {
+            protien: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("protien:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("protien:")').next().text().trim()
+            },
+            carbohydrates: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("carbohydrates:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("carbohydrates:")').next().text().trim()
+            },
+            dietary_fiber: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("dietary fiber:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("dietary fiber:")').next().text().trim()
+            },
+            sugars: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("sugars:")').children('span.nutrient-value').text().trim(),
+                daily_value: "N/A"
+            },
+            fat: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("fat:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("fat:")').next().text().trim()
+            },
+            saturated_fat: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("saturated fat:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("saturated fat:")').next().text().trim()
+            },
+            cholesterol: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("cholesterol:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("cholesterol:")').next().text().trim()
+            },
+            vitamin_a_iu: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("vitamin a iu:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("vitamin a iu:")').next().text().trim()
+            },
+            niacin_equivalents: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("niacin equivalents:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("niacin equivalents:")').next().text().trim()
+            },
+            vitamin_b6: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("vitamin b6:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("vitamin b6:")').next().text().trim()
+            },
+            vitamin_c: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("vitamin c:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("vitamin c:")').next().text().trim()
+            },
+            folate: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("folate:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains(folate:")').next().text().trim()
+            },
+            calcium: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("calcium:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("calcium:")').next().text().trim()
+            },
+            iron: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("iron:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("iron:")').next().text().trim()
+            },
+            magnesium: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("magnesium:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("magnesium:")').next().text().trim()
+            },
+            potassium: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("potassium:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("potassium:")').next().text().trim()
+            },
+            sodium: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("sodium:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("sodium:")').next().text().trim()
+            },
+            thiamin: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("thiamin:")').children('span.nutrient-value').text().trim(),
+                daily_value: $('.nutrition-row .nutrient-name:contains("thiamin:")').next().text().trim()
+            },
+            calories_from_fat: {
+                nutrient_value: $('.nutrition-row .nutrient-name:contains("calories from fat:")').children('span.nutrient-value').text().trim(),
+                daily_value: "N/A"
+            }
+        },
         '#debug': Apify.utils.createRequestDebugInfo(request),
     };
 }
