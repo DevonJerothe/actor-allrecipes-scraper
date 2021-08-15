@@ -29,6 +29,15 @@ function extractData(request, $) {
         }
     }
 
+    const tags = $('.breadcrumbs__list .breadcrumbs__item .breadcrumbs__link .breadcrumbs__title');
+    const tagsList = [];
+
+    for (let index = 0; index < tags.length; index++){
+        if($(tags[index].text().trim()) != "Home" && $(tags[index].text().trim()) != "Recipes"){
+            tagsList.push($(tags[index].text().trim()))
+        }
+    }
+
     return {
         url: request.url,
         name: $('#recipe-main-content').length > 0 ? $('#recipe-main-content').text() : $('.recipe-main-header .heading-content').text(),
@@ -50,6 +59,7 @@ function extractData(request, $) {
                     return '';
                 }
             }),
+        tags: tagsList,
         ingredients: ingredientList,
         directions: directionList,
         prep: $('[itemprop=prepTime]').length > 0 ? $('[itemprop=prepTime]').text()
