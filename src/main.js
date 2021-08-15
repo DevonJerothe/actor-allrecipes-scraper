@@ -29,7 +29,8 @@ function extractData(request, $) {
         }
     }
 
-    const tags = $('.breadcrumbs__list .breadcrumbs__item .breadcrumbs__link .breadcrumbs__title');
+    const tags = $('[itemprop=recipeCategory]').length > 0 ? $('[itemprop=recipeCategory]') 
+        : $('.breadcrumbs__list .breadcrumbs__item .breadcrumbs__link .breadcrumbs__title');
     const tagsList = [];
 
     for (let index = 0; index < tags.length; index++){
