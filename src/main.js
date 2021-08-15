@@ -34,7 +34,7 @@ function extractData(request, $) {
     const tagsList = [];
 
     for (let index = 0; index < tags.length; index++){
-        if($(tags[index].text().trim()) != "Home" && $(tags[index].text().trim()) != "Recipes"){
+        if($(tags[index]).text().trim() != "Home" && $(tags[index]).text().trim() != "Recipes"){
             tagsList.push($(tags[index].text().trim()))
         }
     }
