@@ -122,7 +122,7 @@ function extractData(request, $) {
             },
             folate: {
                 nutrient_value: $('.nutrition-row .nutrient-name:contains("folate:")').children('span.nutrient-value').text().trim(),
-                daily_value: $('.nutrition-row .nutrient-name:contains(folate:")').next().text().trim()
+                daily_value: $('.nutrition-row .nutrient-name:contains("folate:")').next().text().trim()
             },
             calcium: {
                 nutrient_value: $('.nutrition-row .nutrient-name:contains("calcium:")').children('span.nutrient-value').text().trim(),
