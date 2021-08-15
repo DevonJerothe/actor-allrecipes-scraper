@@ -10,7 +10,7 @@ function extractData(request, $) {
     const ingredientList = {};
 
     for (let index = 0; index < ingredients.length; index++) {
-        ingredientList[(index + 1).toString()] = $(ingredients[index]).text().trim();
+        ingredientList[(index).toString()] = $(ingredients[index]).text().trim();
         //ingredientList.push($(ingredients[index]).text().trim());
     }
 
@@ -24,7 +24,7 @@ function extractData(request, $) {
             .join('');
 
         if (text !== '') {
-            directionList[`${index + 1}`] = `${text}`;
+            directionList[`${index}`] = `${text}`;
             // directionList.push(`${index + 1}. ${text}`);
         }
     }
@@ -94,7 +94,7 @@ function extractData(request, $) {
             },
             fat: {
                 nutrient_value: $('.nutrition-row .nutrient-name:contains("fat:")').children('span.nutrient-value').first().text().trim(),
-                daily_value: $('.nutrition-row .nutrient-name:contains("fat:")').next().text().trim()
+                daily_value: $('.nutrition-row .nutrient-name:contains("fat:")').first().next().text().trim()
             },
             saturated_fat: {
                 nutrient_value: $('.nutrition-row .nutrient-name:contains("saturated fat:")').children('span.nutrient-value').text().trim(),
